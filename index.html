@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notas - Estilo Notion</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1>Mis Notas</h1>
+      <button id="add-note-btn">+ Nueva Nota</button>
+      <ul id="note-list">
+        <!-- Aquí se cargarán las notas -->
+      </ul>
+    </aside>
+
+    <main class="content">
+      <div id="note-content" contenteditable="true" class="hidden">
+        <!-- Aquí se editará la nota -->
+      </div>
+      <button id="save-note-btn" class="hidden">Guardar Nota</button>
+      <button id="delete-note-btn" class="hidden">Eliminar Nota</button>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
