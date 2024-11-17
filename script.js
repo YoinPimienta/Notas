@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteNoteBtn = document.getElementById('delete-note-btn');
     let currentNoteId = null;
   
-    // Cargar todas las notas desde la API
     async function loadNotes() {
       const response = await fetch('./backend/notes.php');
       const notes = await response.json();
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   
-    // Abrir el editor de notas para ver/editar
     function openNoteEditor(note) {
       noteContent.classList.remove('hidden');
       noteContent.textContent = note.content;
@@ -30,13 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
       deleteNoteBtn.classList.remove('hidden');
     }
   
-    // Guardar o actualizar la nota
     async function saveNote() {
       const content = noteContent.textContent;
       const title = prompt("Escribe el título de la nota:", "Nueva Nota");
   
       if (currentNoteId) {
-        // Actualizar la nota existente
         const response = await fetch('./backend/notes.php', {
           method: 'PUT',
           headers: {
@@ -47,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = await response.json();
         alert(result.message);
       } else {
-        // Crear una nueva nota
         const response = await fetch('./backend/notes.php', {
           method: 'POST',
           headers: {
@@ -62,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
       resetEditor();
     }
   
-    // Eliminar la nota
     async function deleteNote() {
       const response = await fetch('./backend/notes.php', {
         method: 'DELETE',
@@ -77,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
       resetEditor();
     }
   
-    // Limpiar el editor de notas
     function resetEditor() {
       noteContent.classList.add('hidden');
       noteContent.textContent = '';
@@ -86,19 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
       currentNoteId = null;
     }
   
-    // Botón de nueva nota
     addNoteBtn.addEventListener('click', () => {
       resetEditor();
       saveNote();
     });
   
-    // Guardar nota
     saveNoteBtn.addEventListener('click', saveNote);
   
-    // Eliminar nota
     deleteNoteBtn.addEventListener('click', deleteNote);
   
-    // Cargar las notas al inicio
     loadNotes();
   });
   

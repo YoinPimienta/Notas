@@ -5,14 +5,12 @@ require 'db.php';
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
-    // GET - Obtener todas las notas
     case 'GET':
         $result = $conn->query("SELECT * FROM notes ORDER BY updated_at DESC");
         $notes = $result->fetch_all(MYSQLI_ASSOC);
         echo json_encode($notes);
         break;
 
-    // POST - Crear una nueva nota
     case 'POST':
         $data = json_decode(file_get_contents('php://input'), true);
         $title = $data['title'] ?? 'Nueva Nota';
@@ -24,7 +22,6 @@ switch ($method) {
         echo json_encode(['id' => $conn->insert_id, 'title' => $title, 'content' => $content]);
         break;
 
-    // PUT - Actualizar una nota existente
     case 'PUT':
         $data = json_decode(file_get_contents('php://input'), true);
         $id = $data['id'];
@@ -36,7 +33,6 @@ switch ($method) {
         echo json_encode(['message' => 'Nota actualizada']);
         break;
 
-    // DELETE - Eliminar una nota
     case 'DELETE':
         $data = json_decode(file_get_contents('php://input'), true);
         $id = $data['id'] ?? null;
